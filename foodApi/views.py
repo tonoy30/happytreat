@@ -1,5 +1,5 @@
-from .serializers import ProfileSerializer, FoodRequestSerialization
-from foodApp.models import FoodRequest, Profile
+from .serializers import ProfileSerializer, FoodRequestSerialization, DonatedFoodSerializer
+from foodApp.models import FoodRequest, Profile, DonatedFood
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -23,4 +23,11 @@ class FoodRequestView(APIView):
     def get(self, format=None):
         food_request = FoodRequest.objects.all()
         serializer = FoodRequestSerialization(food_request, many=True)
+        return Response(serializer.data)
+
+
+class DonatedFoodView(APIView):
+    def get(self, request, format=None):
+        donated_food = DonatedFood.objects.all()
+        serializer = DonatedFoodSerializer(donated_food, many=True)
         return Response(serializer.data)

@@ -1,6 +1,6 @@
 from rest_framework import serializers, status
 
-from foodApp.models import Profile, FoodRequest
+from foodApp.models import Profile, FoodRequest, DonatedFood
 
 from django.contrib.auth.models import User
 
@@ -38,3 +38,9 @@ class FoodRequestSerialization(serializers.ModelSerializer):
         model = FoodRequest
         fields = ('food_id', 'donator', 'location', 'quantity', 'expire_time',
                   'food_desc', 'pick_up_time', 'food_status')
+
+
+class DonatedFoodSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DonatedFood
+        fields = ('volunter', 'donated_area', 'beneficent')

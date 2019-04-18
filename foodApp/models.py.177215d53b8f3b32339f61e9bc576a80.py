@@ -59,8 +59,7 @@ class FoodRequest(models.Model):
 
 
 class DonatedFood(models.Model):
-    volunter = models.ForeignKey(
-        Profile, on_delete=models.CASCADE, limit_choices_to={'volunter': 'Y'})
+    volunter = models.ForeignKey(Profile, on_delete=models.CASCADE, limit_choices_to={'volunter': 'Y'})
     donated_area = models.CharField(max_length=100, null=False)
     beneficent = models.PositiveSmallIntegerField(default=0)
 
