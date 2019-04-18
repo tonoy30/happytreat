@@ -1,0 +1,1 @@
+web: gunicorn WasteFood.wsgi --log-file -
