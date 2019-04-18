@@ -19,18 +19,19 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = ('user', 'address', 'phone_number',
                   'volunter', 'avaliable')
 
-    def create(self, validator_data):
-        user_data = validator_data.pop('user')
+    def create(self, validated_data):
+        user_data = validated_data.pop('user')
         user = UserSerializer.create(
-            UserSerializer(), validator_data=user_data)
+            UserSerializer(), validated_data=user_data)
         profile, createed = Profile.objects.update_or_create(user=user,
-                                                             address=validator_data.pop(
+                                                             address=validated_data.pop(
                                                                  'address'),
-                                                             phone_number=validator_data.pop(
+                                                             phone_number=validated_data.pop(
                                                                  'phone_number'),
-                                                             volunter=validator_data.pop(
+                                                             volunter=validated_data.pop(
                                                                  'volunter'),
-                                                             avaliable=validator_data.pop('avaliable'))
+                                                             avaliable=validated_data.pop('avaliable'))
+        return profile
 
 
 class FoodRequestSerialization(serializers.ModelSerializer):

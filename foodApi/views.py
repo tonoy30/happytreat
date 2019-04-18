@@ -2,7 +2,7 @@ from .serializers import ProfileSerializer, FoodRequestSerialization, DonatedFoo
 from foodApp.models import FoodRequest, Profile, DonatedFood
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, generics
 
 
 class ProfileView(APIView):
@@ -13,10 +13,9 @@ class ProfileView(APIView):
 
     def post(self, request):
         serializer = ProfileSerializer(data=request.data)
-        if serializer.is_valid(raise_exception=ValueError):
-            serializer.create(validator_data=request.data)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.error_messages, status=status.HTTP_400_BAD_REQUEST)
+        serializer.is_valid(raise_exception=ValueError)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 class FoodRequestView(APIView):
@@ -25,9 +24,30 @@ class FoodRequestView(APIView):
         serializer = FoodRequestSerialization(food_request, many=True)
         return Response(serializer.data)
 
+    def post(self, request, format=None):
+        serializer = FoodRequestSerialization(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 
 class DonatedFoodView(APIView):
     def get(self, request, format=None):
         donated_food = DonatedFood.objects.all()
         serializer = DonatedFoodSerializer(donated_food, many=True)
         return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = DonatedFoodSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+# class ProfileListView(generics.ListCreateAPIView):
+#     queryset = Profile.objects.all()
+#     serializer_class = ProfileSerializer
+
+
+# class CreateUpdateDestroyProfile(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Profile.objects.all()
+#     serializer_class = ProfileSerializer
