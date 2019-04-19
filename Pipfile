@@ -15,6 +15,7 @@ psycopg2 = "*"
 channels = "*"
 django-debug-toolbar = "*"
 gunicorn = "*"
+twisted = "*"
 
 [requires]
 python_version = "3.6"
