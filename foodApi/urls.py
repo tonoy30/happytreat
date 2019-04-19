@@ -1,7 +1,10 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 urlpatterns = [
+    # Authentication url
+    path('rest-auth/', include('rest_auth.urls')),
+    # Serving url
     path('profile-list/', views.ProfileView.as_view(), name='profile-list'),
     path('food-request/', views.FoodRequestView.as_view(), name='food-request'),
     path('donated-food/', views.DonatedFoodView.as_view(), name='donated-food'),

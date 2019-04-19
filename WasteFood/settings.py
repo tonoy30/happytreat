@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-
+import datetime
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -26,7 +26,7 @@ SECRET_KEY = '@&(8k5_dcf--wba1vr7f9pt(_2t*_f2m&f7@3waas1iu59u-y2'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
+SITE_ID = 1
 
 # Application definition
 
@@ -38,8 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'foodApp',
+    # REST Service
     'rest_framework',
     'corsheaders',
+    'rest_framework.authtoken',  # new!
+    'rest_auth',
 ]
 
 MIDDLEWARE = [
@@ -127,14 +130,14 @@ STATIC_URL = '/static/'
 #     os.path.join(BASE_DIR, static),
 # ]
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.SessionAuthentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-    ),
-}
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework.authentication.SessionAuthentication',
+#     ),
+#     'DEFAULT_PERMISSION_CLASSES': (
+#         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+#     ),
+# }
 CORS_ORIGIN_WHITELIST = (
     'sustta.herokuapp.com',
     'localhost:8000',
@@ -147,3 +150,11 @@ CORS_ORIGIN_WHITELIST = (
 #         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
 #     ]
 # }
+# Configure the JWTs to expire after 1 hour, and allow users to refresh near-expiration tokens
+# Make JWT Auth the default authentication mechanism for Django
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ]
+}
+# Enables django-rest-auth to use JWT tokens instead of regular tokens.
