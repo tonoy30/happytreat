@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'foodApp',
     'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -132,3 +133,8 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ),
 }
+CORS_ORIGIN_WHITELIST = (
+    'sustta.herokuapp.com',
+    'localhost:8000',
+    '127.0.0.1:9000'
+)

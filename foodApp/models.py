@@ -55,7 +55,7 @@ class FoodRequest(models.Model):
         ordering = ('-date_time', 'food_status', )
 
     def __str__(self):
-        return self.donator.user
+        return str(self.donator.user)
 
 
 class DonatedFood(models.Model):
