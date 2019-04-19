@@ -41,8 +41,13 @@ INSTALLED_APPS = [
     # REST Service
     'rest_framework',
     'corsheaders',
-    'rest_framework.authtoken',  # new!
+    # new!
+    'rest_framework.authtoken',
     'rest_auth',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
 ]
 
 MIDDLEWARE = [
@@ -157,4 +162,5 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ]
 }
-# Enables django-rest-auth to use JWT tokens instead of regular tokens.
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

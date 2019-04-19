@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     # Authentication url
     path('rest-auth/', include('rest_auth.urls')),
+    path('rest-auth/registration/', include('rest_auth.registration.urls')),
     # Serving url
     path('profile-list/', views.ProfileListView.as_view(), name='profile-list'),
     path('profile-list/', views.RetrieveUpdateDestroyProfileListView.as_view(),
