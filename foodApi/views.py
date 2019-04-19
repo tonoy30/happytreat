@@ -6,12 +6,12 @@ from rest_framework import status, generics
 
 
 class ProfileListView(generics.ListCreateAPIView):
-    query_set = Profile.objects.all()
+    queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
 
 class RetrieveUpdateDestroyProfileListView(generics.RetrieveUpdateDestroyAPIView):
-    query_set = Profile.objects.all()
+    queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
 
