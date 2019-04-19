@@ -37,11 +37,12 @@ class ProfileSerializer(serializers.ModelSerializer):
 class FoodRequestSerialization(serializers.ModelSerializer):
     class Meta:
         model = FoodRequest
-        fields = ('food_id', 'donator', 'location', 'quantity', 'expire_time',
+        fields = ('donator', 'location', 'quantity', 'expire_time',
                   'food_desc', 'pick_up_time', 'food_status')
 
 
 class DonatedFoodSerializer(serializers.ModelSerializer):
     class Meta:
         model = DonatedFood
-        fields = ('volunter', 'donated_area', 'beneficent')
+        fields = ('volunter', 'donated_area',
+                  'beneficent', 'donated_by', 'finished')

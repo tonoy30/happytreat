@@ -36,8 +36,8 @@ class FoodRequest(models.Model):
         (PROCESSING, 'PRO'),
         (RECEIVED, 'REC'),
     )
-    food_id = models.UUIDField(
-        default=uuid.uuid1, primary_key=True, editable=False)
+    # food_id = models.UUIDField(
+    #     default=uuid.uuid1, primary_key=True, editable=False)
     donator = models.ForeignKey(
         Profile, on_delete=models.CASCADE, limit_choices_to={'volunter': 'N'})
     location = models.CharField(max_length=100)  # Where to pick up food
@@ -55,7 +55,7 @@ class FoodRequest(models.Model):
         ordering = ('-date_time', 'food_status', )
 
     def __str__(self):
-        return f"You  have a doner with name {self.donator.user} in the location of {self.location}"
+        return self.donator.user
 
 
 class DonatedFood(models.Model):
@@ -63,6 +63,11 @@ class DonatedFood(models.Model):
         Profile, on_delete=models.CASCADE, limit_choices_to={'volunter': 'Y'})
     donated_area = models.CharField(max_length=100, null=False)
     beneficent = models.PositiveSmallIntegerField(default=0)
+    donated_by = models.ForeignKey(FoodRequest, on_delete=models.CASCADE)
+    finished = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ('-finished', )
 
     def __str__(self):
         return self.donated_area + str(self.beneficent)
