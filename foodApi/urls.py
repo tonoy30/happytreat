@@ -5,10 +5,13 @@ urlpatterns = [
     # Authentication url
     path('rest-auth/', include('rest_auth.urls')),
     # Serving url
-    path('profile-list/', views.ProfileView.as_view(), name='profile-list'),
-    path('food-request/', views.FoodRequestView.as_view(), name='food-request'),
-    path('donated-food/', views.DonatedFoodView.as_view(), name='donated-food'),
-    # TODO: Make avaliable in final realease
-    path('profile/', views.ProfileListView.as_view(), name='profiles'),
-    path('profile/<int:pk>', views.CreateUpdateDestroyProfile.as_view(), name='create')
+    path('profile-list/', views.ProfileListView.as_view(), name='profile-list'),
+    path('profile-list/', views.RetrieveUpdateDestroyProfileListView.as_view(),
+         name='edit-profile-list'),
+    path('food-request/', views.FoodRequestListView.as_view(), name='food-request'),
+    path('food-request/<int:pk>/',
+         views.CreateUpdateDestroyFoodRequest.as_view(), name='edit-food-request'),
+    path('donated-food/', views.DonatedFoodListView.as_view(), name='donated-food'),
+    path('donated-food/<int:pk>/',
+         views.CreateUpdateDestroyDonatedFood.as_view(), name='edit-donated-food'),
 ]
