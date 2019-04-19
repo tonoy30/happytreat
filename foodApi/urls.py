@@ -7,7 +7,7 @@ urlpatterns = [
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
     # Serving url
     path('profile-list/', views.ProfileListView.as_view(), name='profile-list'),
-    path('profile-list/', views.RetrieveUpdateDestroyProfileListView.as_view(),
+    path('profile-list/<int:pk>/', views.RetrieveUpdateDestroyProfileListView.as_view(),
          name='edit-profile-list'),
     path('food-request/', views.FoodRequestListView.as_view(), name='food-request'),
     path('food-request/<int:pk>/',
