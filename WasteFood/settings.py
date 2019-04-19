@@ -135,14 +135,14 @@ STATIC_URL = '/static/'
 #     os.path.join(BASE_DIR, static),
 # ]
 
-# REST_FRAMEWORK = {
-#     'DEFAULT_AUTHENTICATION_CLASSES': (
-#         'rest_framework.authentication.SessionAuthentication',
-#     ),
-#     'DEFAULT_PERMISSION_CLASSES': (
-#         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-#     ),
-# }
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ),
+}
 CORS_ORIGIN_WHITELIST = (
     'sustta.herokuapp.com',
     'localhost:8000',
@@ -157,10 +157,5 @@ CORS_ORIGIN_WHITELIST = (
 # }
 # Configure the JWTs to expire after 1 hour, and allow users to refresh near-expiration tokens
 # Make JWT Auth the default authentication mechanism for Django
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
-    ]
-}
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
