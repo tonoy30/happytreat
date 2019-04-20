@@ -1,0 +1,11 @@
+.bg-image {
+    background: url('../images/charity.png');
+    background-position: center;
+    background-size: cover
+}
+
+.card {
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+}
