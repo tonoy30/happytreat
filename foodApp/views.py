@@ -13,6 +13,13 @@ def login_view(request):
 
 
 def signup(request):
+    if request.method == "POST":
+        firstname = request.POST['firstname']
+        lastname = request.POST['lastname']
+        email = request.POST['email']
+        password = request.POST['password']
+        password2 = request.POST['password2']
+        print(email)
     return render(request, 'register.html', {})
 
 
